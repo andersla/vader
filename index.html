@@ -21,10 +21,10 @@
 	</style>
     <script src="suncalc.js"></script>
     <script>
-      
+
 function getSunTimes(date, lat, lon) {
   // get today's sunlight times
-  var times = SunCalc.getTimes(date, lat, lon);
+  let times = SunCalc.getTimes(date, lat, lon);
   return times;
 }
 
@@ -61,7 +61,6 @@ function toWeekdayString(date) {
   }
 
   return weekday;
-
 }
 
 function diff_hours(date1, date2) {
@@ -83,7 +82,6 @@ function isSameDay(date1, date2) {
     (date1.getDate() == date2.getDate())
 }
 
-
 function isDayAfter(date1, date2) {
   if (date1 == null || date2 == null) {
     return false;
@@ -97,7 +95,6 @@ function isDayBefore(date1, date2) {
   }
   return isSameDay(minus_time(date1, 1000 * 3600 * 24), date2);
 }
-
 
 function addCell(parent, cellindex, value) {
   let cell = parent.insertCell(cellindex);
@@ -128,17 +125,17 @@ function getWeather() {
   let lat = document.getElementById('weatherform').lat.value;
   let geoname = "Uppsala";
 
-  document.getElementById('console').innerHTML = "Calculating sun-times";
-  let suntime = getSunTimes(lat, lon);
+  document.getElementById('my-console').innerHTML = "Calculating sun-times";
+  let suntime = getSunTimes(lat, lon, new Date());
 
   let base_url = "https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point";
   let url = base_url + "/lon/" + lon +
     "/lat/" + lat + "/data.json";
 
-  document.getElementById('console').innerHTML = "Getting Data";
+  document.getElementById('my-console').innerHTML = "Getting Data";
   get(url).then((data) => {
     data = JSON.parse(data);
-    document.getElementById('console').innerHTML = "Data Fetched";
+    document.getElementById('my-console').innerHTML = "Data Fetched";
     let table = document.getElementById('tempTable');
     let lastDateTime = null;
     let isFirstRow = true;
@@ -183,8 +180,8 @@ function getWeather() {
       }
 
       let nightOrDay = "day";
-      if (dateTime.getHours() < suntime.sunrise.getHours ||
-        dateTime.getHours() > suntime.sunset.getHours) {
+      if (dateTime.getHours() < suntime.sunrise.getHours() ||
+        dateTime.getHours() > suntime.sunset.getHours() ) {
         nightOrDay = "night";
       }
 
@@ -203,7 +200,7 @@ function getWeather() {
         }
         row = table.insertRow(-1);
       } else {
-        //out.append("<td></td>");
+
       }
 
       let totalPrecip = Math.round(hoursSincePrevious * pmean * 10) / 10;
@@ -245,7 +242,7 @@ function getWeather() {
       <button type="submit">V&auml;der</button>
     </form>
   </div>
-  <div id="console"></div>
+  <div id="my-console"></div>
 </body>
 <script>
   window.onload = function() {

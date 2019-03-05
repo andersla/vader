@@ -1,0 +1,54 @@
+<meta charset="UTF-8">
+<html>
+  <head>
+    <title>Anders V&auml;der</title>
+    <script>
+      function get(url) {
+        return new Promise((resolve, reject) => {
+          const req = new XMLHttpRequest();
+          req.open('GET', url);
+          req.onload = () => req.status === 200 ? resolve(req.response) : reject(Error(req.statusText));
+          req.onerror = (e) => reject(Error(`Network Error: ${e}`));
+          req.send();
+        });
+      }
+      function getWeather(e) {
+        e.preventDefault();
+        let base_url="https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point";
+        let url=base_url + "/lon/" + e.srcElement.lon.value +
+                            "/lat/" + e.srcElement.lat.value + "/data.json";
+        document.getElementById('console').innerHTML = "Getting Data";
+        get(url).then((data) => {
+          data = JSON.parse(data);
+          document.getElementById('console').innerHTML = "Data Fetched";
+          let table = document.getElementById('tempTable');
+          for(let i = 0, len = data.timeSeries.length; i < len; i++) {
+            let row = table.insertRow(-1);
+            let cell1 = row.insertCell(0);
+            let cell2 = row.insertCell(1);
+
+            let temp = data.timeSeries[i].parameters.filter(obj => {return obj.name === 't'})[0];
+            cell1.innerHTML = new Date(data.timeSeries[i].validTime);
+            cell2.innerHTML = temp.values[0];
+          }
+        }).catch((err) => {
+          document.getElementById('console').innerHTML = "Couldn't fetch data!";
+          document.getElementById('console').innerHTML += "<br>err";
+          console.err(err)
+        });
+        return false;
+      }
+    </script>
+  </head>
+<body>
+  <form onsubmit='return getWeather(event)'>
+    Lat:<input type='text' name='lat' value='59.842069'>
+    Lon:<input type='text' name='lon' value='17.636540'>
+    <button type="submit">V&auml;der</button>
+  </form>
+  <div id="console"></div>
+  <table id="tempTable">
+    <tr><th>DateTime</th><th>Temperature</th></tr>
+  </table>
+</body>
+</html>

@@ -121,9 +121,15 @@ function getWeather() {
   let lon = document.getElementById('weatherform').lon.value;
   let lat = document.getElementById('weatherform').lat.value;
   let geoname = "Uppsala";
+ 
+  console.log(lat);
+  console.log(lon);
 
   document.getElementById('my-console').innerHTML = "Calculating sun-times";
-  let suntime = getSunTimes(lat, lon, new Date());
+  
+  let now = new Date();	
+  console.log(now);
+  let suntime = getSunTimes(lat, lon, now);
   
   console.log(suntime);
 

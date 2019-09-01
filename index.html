@@ -124,6 +124,8 @@ function getWeather() {
 
   document.getElementById('my-console').innerHTML = "Calculating sun-times";
   let suntime = getSunTimes(lat, lon, new Date());
+  
+  console.log(suntime);
 
   let base_url = "https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point";
   let url = base_url + "/lon/" + lon +

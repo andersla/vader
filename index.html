@@ -129,7 +129,7 @@ function getWeather() {
   
   let now = new Date();	
   console.log(now);
-  let suntime = getSunTimes(lat, lon, now);
+  let suntime = getSunTimes(now, lat, lon);
   
   console.log(suntime);
 

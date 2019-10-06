@@ -50,11 +50,11 @@ function toWeekdayString(date) {
 
   let weekday = capitalize(toWeekday(date));
   if (isSameDay(today, date)) {
-    weekday = "Idag";
+    weekday = "Idag, " + weekday;
   } else if (isDayAfter(today, date)) {
-    weekday = "Imorgon";
+    weekday = "Imorgon, " + weekday;
   } else if (isDayBefore(today, date)) {
-    weekday = "Igår";
+    weekday = "Igår, " + weekday;
   }
 
   return weekday;

@@ -50,11 +50,11 @@ function toWeekdayString(date) {
 
   let weekday = capitalize(toWeekday(date));
   if (isSameDay(today, date)) {
-    weekday = "Idag";
+    weekday = "Idag, " + weekday;
   } else if (isDayAfter(today, date)) {
-    weekday = "Imorgon";
+    weekday = "Imorgon, " + weekday;
   } else if (isDayBefore(today, date)) {
-    weekday = "Igår";
+    weekday = "Igår, " + weekday;
   }
 
   return weekday;
@@ -121,9 +121,17 @@ function getWeather() {
   let lon = document.getElementById('weatherform').lon.value;
   let lat = document.getElementById('weatherform').lat.value;
   let geoname = "Uppsala";
+ 
+  console.log(lat);
+  console.log(lon);
 
   document.getElementById('my-console').innerHTML = "Calculating sun-times";
-  let suntime = getSunTimes(lat, lon, new Date());
+  
+  let now = new Date();	
+  console.log(now);
+  let suntime = getSunTimes(now, lat, lon);
+  
+  console.log(suntime);
 
   let base_url = "https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point";
   let url = base_url + "/lon/" + lon +

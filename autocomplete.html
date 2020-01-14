@@ -1,0 +1,77 @@
+<html>
+
+<head>
+
+<link rel='stylesheet' href='https://cdn.rawgit.com/LeaVerou/awesomplete/gh-pages/awesomplete.css'/>
+
+<script src='https://cdn.rawgit.com/LeaVerou/awesomplete/gh-pages/awesomplete.js'
+  crossorigin=''>
+</script>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'
+  crossorigin=''>
+</script>
+
+<style>
+body{
+  background: #F3F3F3;
+}
+</style>
+
+</head>
+
+<body>
+
+
+<p>
+  Please enter country. Results are fetched from https://restcountries.eu/
+</p>
+<input id="countries" placeholder="Enter a country"/>
+
+
+
+</body>
+
+<script>
+
+
+
+var input = document.getElementById("countries");
+var awesomplete = new Awesomplete(input, {
+  minChars: 1,
+  autoFirst: true,
+  // insert label instead of value into the input.
+  replace: function(suggestion) {
+	this.input.value = suggestion.label;
+  }
+});
+
+$("input").on("keyup", function(){
+  $.ajax({
+    //url: 'https://restcountries.eu/rest/v1/name/' + this.value,
+    url: 'https://www.smhi.se/wpt-a/backend_tendayforecast/geo/autocomplete/' + this.value,
+    type: 'GET',
+    dataType: 'json'
+  })
+  .success(function(data) {
+    var list = [];
+    $.each(data, function(key, value) {
+
+      var additional = value.municipality;
+      if(additional === undefined){
+		  additional = value.country;
+	  }
+
+      var fullplace = value.place + ', ' + additional;
+      list.push( {label: fullplace, value: "latlon"} );
+
+    });
+    awesomplete.list = list;
+  });
+});
+
+
+
+</script>
+
+</html>

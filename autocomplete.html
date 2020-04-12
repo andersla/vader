@@ -1,77 +1,167 @@
 <html>
 
 <head>
-
+<meta charset="utf-8" />
 <link rel='stylesheet' href='https://cdn.rawgit.com/LeaVerou/awesomplete/gh-pages/awesomplete.css'/>
-
 <script src='https://cdn.rawgit.com/LeaVerou/awesomplete/gh-pages/awesomplete.js'
   crossorigin=''>
 </script>
-
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'
-  crossorigin=''>
-</script>
-
 <style>
-body{
-  background: #F3F3F3;
-}
+  body{
+    background: #F3F3F3;
+  }
 </style>
-
 </head>
 
 <body>
 
+<section id="ajax-example">
+	<h2>Ajax example <small>(restcountries.eu api)</small></h2>
+	<label class="">Select French speaking country <input name="lod" id="locinput" type="text"></label>
+	<pre class="language-javascript"><code>
 
-<p>
-  Please enter location. Results are fetched from https://www.smhi.se/wpt-a/backend_tendayforecast/geo/autocomplete/
-</p>
-<input id="countries" placeholder="Enter a country"/>
+	<script>
 
-
-
-</body>
-
-<script>
-
-
-
-var input = document.getElementById("countries");
-var awesomplete = new Awesomplete(input, {
-  minChars: 1,
-  autoFirst: true,
-  // insert label instead of value into the input.
-  replace: function(suggestion) {
-	this.input.value = suggestion.label;
-  }
-});
-
-$("input").on("keyup", function(){
-  $.ajax({
-    //url: 'https://restcountries.eu/rest/v1/name/' + this.value,
-    url: 'https://www.smhi.se/wpt-a/backend_tendayforecast/geo/autocomplete/' + this.value,
-    type: 'GET',
-    dataType: 'json'
-  })
-  .success(function(data) {
-    var list = [];
-    $.each(data, function(key, value) {
-
-      var additional = value.municipality;
-      if(additional === undefined){
-		  additional = value.country;
+	  function getCookie(name) {
+	    let cookie = {};
+	    document.cookie.split(';').forEach(function(el) {
+	      let [k,v] = el.split('=');
+	      cookie[k.trim()] = v;
+	    })
+	    return cookie[name];
 	  }
 
-      var fullplace = value.place + ', ' + additional;
-      list.push( {label: fullplace, value: "latlon"} );
+	  function setCookie(name, value, expires = "Tue, 19 Jan 2038 03:14:00 UTC") {
+	    let cookie_string = name + "=" + value + ";expires=" + expires + ";path=/";
+	    console.log(cookie_string);
+	    document.cookie = cookie_string;
+	  }
 
-    });
-    awesomplete.list = list;
-  });
-});
+	  function deleteCookie(name){
+	    setCookie(name, '', -1);
+	  }
+
+	  //function deleteCookie(name) {
+	  //  document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+	  //  console.log("document.cookie", document.cookie);
+	  //}
+
+	  function setCookieData(name, data) {
+	    let value = JSON.stringify(data);
+	    setCookie(name, value);
+	  }
+
+	  function getCookieData(name) {
+	    let cookie = getCookie(name);
+	    if(cookie == null){
+	      return null;
+	    }
+	    else{
+	      return JSON.parse(cookie);
+	    }
+	  }
+
+	  function getPlaces(){
+	    let places = getCookieData("places");
+	    if(places == null){
+	      places = getDefaultPlaces();
+	    }
+	    return places;
+	  }
+
+	  function setPlaces(places){
+	    setCookieData("places", places);
+	  }
+
+	  function getDefaultPlaces(){
+	    let places = new Array(10);
+	    places[0] = {"geoname": "Uppsala", "lon": "17.636540", "lat": "59.842069"};
+	    places[1] = {"key2": "value2"};
+	    return places;
+	  }
+
+
+	  function getNewListWithAjax(awesome, input){
+	    console.log('test6');
+	    let ajax = new XMLHttpRequest();
+
+	    ajax.open("GET", "https://www.smhi.se/wpt-a/backend_tendayforecast/geo/autocomplete/" + input.value, true);
+
+	    ajax.onload = function() {
+	      let list = buildListFromLocations(JSON.parse(ajax.responseText));
+
+	      // Update awesome with new list
+	      awesome.list = list;
+              awesome.evaluate();
+	    };
+	    ajax.send();
+	  }
+
+	  function buildListFromLocations(locations){
+	    let list = [];
+
+            Object.values(locations).forEach(function(location) {
+
+	      // Set munincipality as default region
+	      let region = location.municipality;
+
+	      // If no municipality exists for this place, set country as region
+	      if(region === undefined){
+	        region = location.country;
+	      }
+
+	      // Create a place label
+	      let fullplace = location.place + ', ' + region;
+
+              // Add lat/lon to data object
+	      data = {
+		"name": fullplace,
+		"geoname": location.place,
+		"lat": location.lat,
+		"lon": location.lon
+	      }
+
+	      // Add element to list
+	      list.push( {label: fullplace, value: data} );
+
+            });
+
+	    return list;
+	  }
+
+
+	  let myInput = document.querySelector("#ajax-example input");
+	  let myOptions = null;
+	  let myAwesome = new Awesomplete(myInput, myOptions);
+          myInput.addEventListener('input', function() {
+              getNewListWithAjax(myAwesome, myInput);
+          });
+
+	  myInput.addEventListener('awesomplete-select',function(obj){
+
+            console.log("obj", obj.text);
+	    obj.text.value = obj.text.label
+
+	    let places = new Array(10);
+	    places[0] = data;
+	    setPlaces(places);
+
+	    //alert("wait");
+	    location.assign("index.html");
+
+	  });
 
 
 
-</script>
+	</script>
+
+
+
+
+	</code></pre>
+
+</section>
+
+</body>
 
 </html>

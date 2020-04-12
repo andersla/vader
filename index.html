@@ -116,21 +116,98 @@ function get(url) {
   });
 }
 
+function getCookie(name) {
+  let cookie = {};
+  document.cookie.split(';').forEach(function(el) {
+    let [k,v] = el.split('=');
+    cookie[k.trim()] = v;
+  })
+  return cookie[name];
+}
+
+function setCookie(name, value, expires = "Tue, 19 Jan 2038 03:14:00 UTC") {
+  let cookie_string = name + "=" + value + ";expires=" + expires + ";path=/";
+  console.log(cookie_string);
+  document.cookie = cookie_string;
+}
+
+function deleteCookie(name){
+  setCookie(name, '', -1);
+}
+
+//function deleteCookie(name) {
+//  document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+//  console.log("document.cookie", document.cookie);
+//}
+
+function setCookieData(name, data) {
+  let value = JSON.stringify(data);
+  setCookie(name, value);
+}
+
+function getCookieData(name) {
+  let cookie = getCookie(name);
+  if(cookie == null){
+    return null;
+  }
+  else{
+    return JSON.parse(cookie);
+  }
+}
+
+function getPlaces(){
+  let places = getCookieData("places");
+  if(places == null){
+    places = getDefaultPlaces();
+  }
+  return places;
+}
+
+function setPlaces(places){
+  setCookieData("places", places);
+}
+
+function getDefaultPlaces(){
+  let places = new Array(10);
+  places[0] = {"geoname": "Uppsala", "lon": "17.636540", "lat": "59.842069"};
+  places[1] = {"key2": "value2"};
+  return places;
+}
+
+function deletePlaces(){
+  deleteCookie("places");
+}
+
 function getWeather() {
+
+  //deletePlaces();
+
+  places = getPlaces();
+
+  setPlaces(places);
+
+  console.log("places", places);
+  console.log("places[0]", places[0]);
+  console.log("places[1]", places[1]);
+  console.log("places[2]", places[2]);
+
   //e.preventDefault();
-  let lon = document.getElementById('weatherform').lon.value;
-  let lat = document.getElementById('weatherform').lat.value;
-  let geoname = "Uppsala";
- 
+//  let lon = document.getElementById('weatherform').lon.value;
+//  let lat = document.getElementById('weatherform').lat.value;
+//  let geoname = "Uppsala";
+  let lon = places[0].lon;
+  let lat = places[0].lat;
+  let geoname = places[0].geoname;
+
   console.log(lat);
   console.log(lon);
 
   document.getElementById('my-console').innerHTML = "Calculating sun-times";
-  
-  let now = new Date();	
+
+  let now = new Date();
   console.log(now);
   let suntime = getSunTimes(now, lat, lon);
-  
+
   console.log(suntime);
 
   let base_url = "https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point";
@@ -196,7 +273,7 @@ function getWeather() {
         addCell(row, 0, '&nbsp');
         row = table.insertRow(-1);
         if (isFirstRow) {
-          let cell = addCell(row, 0, '<b>' + weekday + '</b> ' + dayAndMonth + ' - <b>' + geoname + '</b>');
+          let cell = addCell(row, 0, '<b>' + weekday + '</b> ' + dayAndMonth + ' - <b><a href="autocomplete.html">' + geoname + '</a></b>');
           cell.colSpan = 6;
           isFirstRow = false;
         } else {

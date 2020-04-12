@@ -168,6 +168,12 @@
 	    var input = document.querySelector("#plats-search input").focus();
 	  }
 
+	  document.body.ontouchend = function() {
+	    document.querySelector("#plats-search input").focus();
+	  };
+
+	  console.log("Done");
+
 
 	</script>
 

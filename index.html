@@ -1,20 +1,22 @@
-<meta charset="UTF-8">
 <html>
   <head>
-    <title>Anders V&auml;der</title>
+    <title>Anders Väder</title>
     <meta charset=UTF-8>
     <link rel=icon href=images/favicon.png>
     <meta name=viewport content="width=device-width, initial-scale=0.8">
 
     <style>
       body {
-	    margin-top: 5px;
-	    margin-left: 20px;
-	    margin-right: 10px;
-	  }
-	  td {
+	      margin-top: 5px;
+	      margin-left: 20px;
+	      margin-right: 10px;
+      }
+      a:link {
+        text-decoration: none;
+      }
+	    td {
 	     padding:2px;
-	  }
+	    }
 	</style>
     <script src="suncalc.js"></script>
     <script>
@@ -170,7 +172,7 @@ function setPlaces(places){
 
 function getDefaultPlaces(){
   let places = new Array(10);
-  places[0] = {"geoname": "Uppsala", "lon": "17.636540", "lat": "59.842069"};
+  places[0] = {"name": "Uppsala", "geoname": "Uppsala", "lon": "17.636540", "lat": "59.842069"};
   places[1] = {"key2": "value2"};
   return places;
 }
@@ -196,9 +198,9 @@ function getWeather() {
 //  let lon = document.getElementById('weatherform').lon.value;
 //  let lat = document.getElementById('weatherform').lat.value;
 //  let geoname = "Uppsala";
-  let lon = places[0].lon;
-  let lat = places[0].lat;
-  let geoname = places[0].geoname;
+  let lon = Number(places[0].lon).toFixed(6);
+  let lat = Number(places[0].lat).toFixed(6);
+  let geoname = places[0].name;
 
   console.log(lat);
   console.log(lon);

@@ -1,23 +1,26 @@
 <html>
-
 <head>
-<meta charset="utf-8" />
-<link rel='stylesheet' href='https://cdn.rawgit.com/LeaVerou/awesomplete/gh-pages/awesomplete.css'/>
-<script src='https://cdn.rawgit.com/LeaVerou/awesomplete/gh-pages/awesomplete.js'
-  crossorigin=''>
-</script>
-<style>
-  body{
-    background: #F3F3F3;
-  }
-</style>
+  <title>Anders Väder - Sök plats</title>
+  <meta charset=UTF-8>
+  <meta name=viewport content="width=device-width, initial-scale=0.8">
+  <link rel=icon href=images/favicon.png>
+
+  <link rel='stylesheet' href='https://cdn.rawgit.com/LeaVerou/awesomplete/gh-pages/awesomplete.css'/>
+  <script src='https://cdn.rawgit.com/LeaVerou/awesomplete/gh-pages/awesomplete.js'
+    crossorigin=''>
+  </script>
+  <style>
+    body{
+      background: #F3F3F3;
+    }
+  </style>
 </head>
 
 <body>
 
-<section id="ajax-example">
-	<h2>Ajax example <small>(restcountries.eu api)</small></h2>
-	<label class="">Select French speaking country <input name="lod" id="locinput" type="text"></label>
+<section id="plats-search">
+	<h2>Välj/Sök plats</h2>
+	<label class=""><input name="lod" id="locinput" type="text" autofocus></label>
 	<pre class="language-javascript"><code>
 
 	<script>
@@ -129,8 +132,12 @@
 	    return list;
 	  }
 
-
-	  let myInput = document.querySelector("#ajax-example input");
+	  /*
+	  *
+	  * Create and configure the autocomplete input-box
+	  *
+	  */
+	  let myInput = document.querySelector("#plats-search input");
 	  let myOptions = null;
 	  let myAwesome = new Awesomplete(myInput, myOptions);
           myInput.addEventListener('input', function() {
@@ -140,13 +147,16 @@
 	  myInput.addEventListener('awesomplete-select',function(obj){
 
             console.log("obj", obj.text);
-	    obj.text.value = obj.text.label
 
+	    // Create a new cookie with new location data
 	    let places = new Array(10);
-	    places[0] = data;
+	    places[0] = obj.text.value;
 	    setPlaces(places);
 
-	    //alert("wait");
+	    // change value to label (otherwise data-Object is displayed in input box)
+	    obj.text.value = obj.text.label
+
+	    // Go back to Weather-page
 	    location.assign("index.html");
 
 	  });

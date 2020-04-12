@@ -205,7 +205,7 @@ function getWeather() {
   console.log(lat);
   console.log(lon);
 
-  document.getElementById('my-console').innerHTML = "Calculating sun-times";
+  // document.getElementById('my-console').innerHTML = "Calculating sun-times";
 
   let now = new Date();
   console.log(now);
@@ -219,10 +219,10 @@ function getWeather() {
 
   console.log("url", url);
 
-  document.getElementById('my-console').innerHTML = "Getting Data";
+  // document.getElementById('my-console').innerHTML = "Getting Data";
   get(url).then((data) => {
     data = JSON.parse(data);
-    document.getElementById('my-console').innerHTML = "Data Fetched";
+    // document.getElementById('my-console').innerHTML = "Data Fetched";
     let table = document.getElementById('tempTable');
     let lastDateTime = null;
     let isFirstRow = true;
@@ -330,8 +330,10 @@ function getWeather() {
       <button type="submit">V&auml;der</button>
     </form>
   </div>
-  -->
+
   <div id="my-console"></div>
+  -->
+
 </body>
 <script>
   window.onload = function() {

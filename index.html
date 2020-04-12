@@ -214,6 +214,8 @@ function getWeather() {
   let url = base_url + "/lon/" + lon +
     "/lat/" + lat + "/data.json";
 
+  console.log("base_url", base_url);
+
   document.getElementById('my-console').innerHTML = "Getting Data";
   get(url).then((data) => {
     data = JSON.parse(data);

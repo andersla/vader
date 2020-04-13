@@ -275,9 +275,13 @@ function getSunTimes(date, lat, lon) {
             addCell(row, 5, '&nbsp');
           }
     
-    
           lastDateTime = dateTime;
         }
+
+        // Finally add about message
+        let aboutDiv = document.getElementById('aboutDiv');
+        aboutDiv.innerHTML = "All prognosdata hämtas från SMHI via SMHI Open Data API";
+
       }).catch((err) => {
         console.log(err)
         // Clear cookie if that is the problem

@@ -19,11 +19,9 @@ function getCookie(name) {
 
   function setCookieData(name, data) {
     console.log("data:", data);
+    // Data is stored in base64 encoded and in json format
     let value = window.btoa(JSON.stringify(data));
-    let base64 = 
-    console.log("value:", value);
     setCookie(name, value);
-    console.log("getCookieData", getCookieData(name));
   }
 
   function getCookieData(name) {
@@ -33,6 +31,7 @@ function getCookie(name) {
       return null;
     }
     else{
+      // Data is base64 encoded and in json format
       return JSON.parse(window.atob(cookie));
     }
   }
@@ -51,8 +50,7 @@ function getCookie(name) {
 
   function getDefaultPlaces(){
     let places = new Array(10);
-    places[0] = {"geoname": "Uppsala", "lon": "17.636540", "lat": "59.842069"};
-    places[1] = {"key2": "value2"};
+    places[0] = {"name": "Uppsala", "geoname": "Uppsala", "lon": "17.636540", "lat": "59.842069"};
     return places;
   }
 
@@ -115,6 +113,8 @@ function getCookie(name) {
   * Create and configure the autocomplete input-box
   *
   */
+
+try{
   let myInput = document.querySelector("#plats-search input");
   let myOptions = {"minChars": 1,
                    "autoFirst": true,
@@ -136,7 +136,7 @@ function getCookie(name) {
     // change value to label (otherwise data-Object is displayed in input box)
     obj.text.value = obj.text.label
 
-    alert("Wait");
+    //alert("Wait");
 
     // Go back to Weather-page
     location.assign("index.html");
@@ -144,3 +144,10 @@ function getCookie(name) {
   });
 
   console.log("Done");
+
+}
+catch(err) {
+  console.log(err);
+  // Clear cookie if that is the problem
+  deleteCookie("places");
+}

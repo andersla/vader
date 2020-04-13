@@ -18,12 +18,16 @@ function getCookie(name) {
   }
 
   function setCookieData(name, data) {
+    console.log("data:", data);
     let value = JSON.stringify(data);
+    console.log("value:", value);
     setCookie(name, value);
+    console.log("getCookieData", getCookieData(name));
   }
 
   function getCookieData(name) {
     let cookie = getCookie(name);
+    console.log("cookie", cookie);
     if(cookie == null){
       return null;
     }

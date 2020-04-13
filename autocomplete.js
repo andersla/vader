@@ -9,7 +9,7 @@ function getCookie(name) {
 
   function setCookie(name, value, expires = "Tue, 19 Jan 2038 03:14:00 UTC") {
     let cookie_string = name + "=" + value + ";expires=" + expires + ";path=/";
-    console.log(cookie_string);
+    console.log("cookiestring", cookie_string);
     document.cookie = cookie_string;
   }
 

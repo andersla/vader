@@ -115,6 +115,13 @@ function buildListFromLocations(locations) {
   return list;
 }
 
+function comparePlaces(a, b) {
+  if (a > b) return 1;
+  if (b > a) return -1;
+  
+  return 0;
+}
+
 /*
  *
  * Create and configure the autocomplete input-box

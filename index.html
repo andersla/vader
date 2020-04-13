@@ -1,32 +1,35 @@
 <html>
-  <head>
-    <title>Anders Väder</title>
-    <meta charset=UTF-8>
-    <link rel=icon href=images/favicon.png>
-    <meta name=viewport content="width=device-width, initial-scale=0.8">
 
-    <style>
-      body {
-	      margin-top: 5px;
-	      margin-left: 20px;
-	      margin-right: 10px;
-      }
-      a:link {
-        text-decoration: none;
-      }
-	    td {
-	     padding:2px;
-	    }
-	</style>
+<head>
+  <title>Anders Väder</title>
+  <meta charset=UTF-8>
+  <link rel=icon href=images/favicon.png> <meta name=viewport content="width=device-width, initial-scale=0.8">
 
-  </head>
+  <style>
+    body {
+      margin-top: 5px;
+      margin-left: 20px;
+      margin-right: 10px;
+    }
+
+    a:link {
+      text-decoration: none;
+    }
+
+    td {
+      padding: 2px;
+    }
+  </style>
+
+</head>
+
 <body>
   <div>
     <table id="tempTable">
       <!--<tr><th>DateTime</th><th>Temperature</th></tr>-->
     </table>
   </div>
-<!--
+  <!--
   <div>
     <form id="weatherform" onsubmit='return getWeather(event)'>
       Lat:<input type='text' name='lat' value='59.842069'>
@@ -41,11 +44,12 @@
 </body>
 
 <script src="suncalc.js"></script>
-<script src='vader.js'></script>
+<script src="vader.js" charset="UTF-8"></script>
 
 <script>
-  window.onload = function() {
+  window.onload = function () {
     getWeather();
   };
 </script>
+
 </html>

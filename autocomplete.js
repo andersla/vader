@@ -13,7 +13,7 @@ function setCookie(name, value, expires = "Tue, 19 Jan 2038 03:14:00 UTC") {
   document.cookie = cookie_string;
 }
 
-function deleteCookie(name){
+function deleteCookie(name) {
   setCookie(name, '', "Thu, 01 Jan 1970 00:00:00 GMT");
 }
 
@@ -47,7 +47,32 @@ function setPlaces(places) {
   setCookieData("places", places);
 }
 
-function deletePlaces(){
+function addPlace(newPlace) {
+  let newPlaces = new Array(0);
+  newPlaces.push(newPlace);
+
+  // Loop existing places and add them to new if not same as the new one
+  let places = getPlaces();
+  Object.values(places).forEach(function (place) {
+
+    // Only add if not same as the newPlace
+    if(place != null && place.name != newPlace.name){
+      // Add element to list
+      newPlaces.push(place);
+    }
+  });
+
+  // Max 10 long
+  if(newPlaces.length > 10){
+    newPlaces = newPlaces.slice(0,10);
+  }
+
+  console.log("newPlaces", newPlaces);
+
+  setPlaces(newPlaces);
+}
+
+function deletePlaces() {
   deleteCookie("places");
 }
 
@@ -148,10 +173,8 @@ try {
 
     console.log("obj", obj.text);
 
-    // Create a new cookie with new location data
-    let places = new Array(10);
-    places[0] = obj.text.value;
-    setPlaces(places);
+    // Create a new cookie with new selected location data as first object
+    addPlace(obj.text.value);
 
     // change value to label (otherwise data-Object is displayed in input box)
     obj.text.value = obj.text.label

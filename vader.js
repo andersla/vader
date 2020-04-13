@@ -167,9 +167,6 @@ function getSunTimes(date, lat, lon) {
       setPlaces(places);
     
       console.log("places", places);
-      console.log("places[0]", places[0]);
-      console.log("places[1]", places[1]);
-      console.log("places[2]", places[2]);
     
       let lon = Number(places[0].lon).toFixed(6);
       let lat = Number(places[0].lat).toFixed(6);

@@ -131,6 +131,8 @@ function getCookie(name) {
     // change value to label (otherwise data-Object is displayed in input box)
     obj.text.value = obj.text.label
 
+    alert("Wait");
+
     // Go back to Weather-page
     location.assign("index.html");
 

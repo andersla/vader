@@ -19,7 +19,8 @@ function getCookie(name) {
 
   function setCookieData(name, data) {
     console.log("data:", data);
-    let value = JSON.stringify(data);
+    let value = window.btoa(JSON.stringify(data));
+    let base64 = 
     console.log("value:", value);
     setCookie(name, value);
     console.log("getCookieData", getCookieData(name));
@@ -32,7 +33,7 @@ function getCookie(name) {
       return null;
     }
     else{
-      return JSON.parse(cookie);
+      return JSON.parse(window.atob(cookie));
     }
   }
 

@@ -101,40 +101,40 @@ function getSunTimes(date, lat, lon) {
     document.cookie.split(';').forEach(function(el) {
       let [k,v] = el.split('=');
       cookie[k.trim()] = v;
-    })
+    });
     return cookie[name];
   }
-  
+
   function setCookie(name, value, expires = "Tue, 19 Jan 2038 03:14:00 UTC") {
     let cookie_string = name + "=" + value + ";expires=" + expires + ";path=/";
-    console.log(cookie_string);
+    console.log("cookiestring", cookie_string);
     document.cookie = cookie_string;
   }
-  
+
   function deleteCookie(name){
     setCookie(name, '', -1);
   }
-  
-  //function deleteCookie(name) {
-  //  document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-  //  console.log("document.cookie", document.cookie);
-  //}
-  
+
   function setCookieData(name, data) {
-    let value = JSON.stringify(data);
+    console.log("data:", data);
+    let value = window.btoa(JSON.stringify(data));
+    let base64 = 
+    console.log("value:", value);
     setCookie(name, value);
+    console.log("getCookieData", getCookieData(name));
   }
-  
+
   function getCookieData(name) {
     let cookie = getCookie(name);
+    console.log("cookie", cookie);
     if(cookie == null){
       return null;
     }
     else{
-      return JSON.parse(cookie);
+      return JSON.parse(window.atob(cookie));
     }
   }
-  
+
   function getPlaces(){
     let places = getCookieData("places");
     if(places == null){
@@ -142,20 +142,16 @@ function getSunTimes(date, lat, lon) {
     }
     return places;
   }
-  
+
   function setPlaces(places){
     setCookieData("places", places);
   }
-  
+
   function getDefaultPlaces(){
     let places = new Array(10);
-    places[0] = {"name": "Uppsala", "geoname": "Uppsala", "lon": "17.636540", "lat": "59.842069"};
+    places[0] = {"geoname": "Uppsala", "lon": "17.636540", "lat": "59.842069"};
     places[1] = {"key2": "value2"};
     return places;
-  }
-  
-  function deletePlaces(){
-    deleteCookie("places");
   }
   
   function getWeather() {

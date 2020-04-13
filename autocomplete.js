@@ -13,8 +13,8 @@ function setCookie(name, value, expires = "Tue, 19 Jan 2038 03:14:00 UTC") {
   document.cookie = cookie_string;
 }
 
-function deleteCookie(name) {
-  setCookie(name, '', -1);
+function deleteCookie(name){
+  setCookie(name, '', "Thu, 01 Jan 1970 00:00:00 GMT");
 }
 
 function setCookieData(name, data) {
@@ -45,6 +45,10 @@ function getPlaces() {
 
 function setPlaces(places) {
   setCookieData("places", places);
+}
+
+function deletePlaces(){
+  deleteCookie("places");
 }
 
 function getDefaultPlaces() {
@@ -118,7 +122,7 @@ function buildListFromLocations(locations) {
 function comparePlaces(a, b) {
   if (a > b) return 1;
   if (b > a) return -1;
-  
+
   return 0;
 }
 
@@ -164,5 +168,5 @@ try {
 } catch (err) {
   console.log(err);
   // Clear cookie if that is the problem
-  deleteCookie("places");
+  deletePlaces();
 }

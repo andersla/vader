@@ -146,6 +146,10 @@ function getSunTimes(date, lat, lon) {
     setCookieData("places", places);
   }
 
+  function deletePlaces(){
+    deleteCookie("places");
+  }
+
   function getDefaultPlaces(){
     let places = new Array(10);
     places[0] = {"name": "Uppsala", "geoname": "Uppsala", "lon": "17.636540", "lat": "59.842069"};
@@ -167,18 +171,12 @@ function getSunTimes(date, lat, lon) {
       console.log("places[1]", places[1]);
       console.log("places[2]", places[2]);
     
-      //e.preventDefault();
-    //  let lon = document.getElementById('weatherform').lon.value;
-    //  let lat = document.getElementById('weatherform').lat.value;
-    //  let geoname = "Uppsala";
       let lon = Number(places[0].lon).toFixed(6);
       let lat = Number(places[0].lat).toFixed(6);
       let geoname = places[0].name;
     
       console.log(lat);
       console.log(lon);
-    
-      // document.getElementById('my-console').innerHTML = "Calculating sun-times";
     
       let now = new Date();
       console.log(now);
@@ -283,7 +281,7 @@ function getSunTimes(date, lat, lon) {
       }).catch((err) => {
         console.log(err)
         // Clear cookie if that is the problem
-        deleteCookie("places");
+        deletePlaces();
 
       });
       
@@ -293,7 +291,7 @@ function getSunTimes(date, lat, lon) {
     catch(err) {
       console.log(err);
       // Clear cookie if that is the problem
-      deleteCookie("places");
+      deletePlaces();
     }
 
   }

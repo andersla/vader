@@ -262,7 +262,7 @@ function getSunTimes(date, lat, lon) {
             let cell = addCell(row, 0, '<b>' + weekday + '</b> ' + dayAndMonth);
             cell.colSpan = 6;
           }
-          row = table.insertRow(-1)
+          row = table.insertRow(-1);
         } else {
   
         }

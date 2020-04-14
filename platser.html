@@ -1,0 +1,52 @@
+<html>
+
+<head>
+    <title>Anders Väder - Sök plats</title>
+    <meta charset=UTF-8>
+    <meta name=viewport content="width=device-width, initial-scale=1.2">
+    <link rel=icon href=images/favicon.png> <link rel='stylesheet'
+        href='https://cdn.rawgit.com/LeaVerou/awesomplete/gh-pages/awesomplete.css' />
+
+    <style>
+        body {
+            background: #F3F3F3;
+        }
+
+        div.aboutDiv {
+            font-size: small;
+        }
+    </style>
+</head>
+
+<body>
+    <section id="plats-search">
+        <h2>Välj/Sök plats</h2>
+        <label class=""><input name="lod" id="locinput" type="text" autofocus></label>
+    </section>
+    <div>
+        <br>
+    </div>
+    <div class="aboutDiv" id="aboutDiv">
+        Platser hämtas från SMHI via SMHI Open Data API
+    </div>
+
+    <script src="https://cdn.rawgit.com/LeaVerou/awesomplete/gh-pages/awesomplete.js" crossorigin=""></script>
+    <script src="common.js" charset="UTF-8"></script>
+    <script src="platser.js" charset="UTF-8"></script>
+
+    <script>
+        // Automatic display soft keyboard on ios
+        //document.body.ontouchend = function() { document.querySelector"#plats-search input").focus(); };
+
+        window.onload = function () {
+            var input = document.querySelector("#plats-search input").focus();
+        }
+
+        document.body.ontouchend = function () {
+            document.querySelector("#plats-search input").focus();
+        };
+    </script>
+
+</body>
+
+</html>

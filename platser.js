@@ -2,7 +2,7 @@ function getNewListWithAjax(awesome, input) {
     console.log('inside getNewListWithAjax');
     let ajax = new XMLHttpRequest();
 
-    ajax.open("GET", "https://www.smhi.se/wpt-a/backend_tendayforecast/geo/autocomplete/" + input.value, true);
+    ajax.open("GET", "https://www.smhi.se/wpt-a/backend_tendayforecast_nextgen/geo/autocomplete/places/" + input.value, true);
 
     ajax.onload = function () {
         let list = buildListFromLocations(JSON.parse(ajax.responseText));

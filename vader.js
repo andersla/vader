@@ -20,7 +20,7 @@ function toMonth(date) {
   let options = {
     month: 'short'
   };
-  let month = new Intl.DateTimeFormat('se-SE', options).format(date);
+  let month = new Intl.DateTimeFormat('sv-SE', options).format(date);
   return month;
 }
 

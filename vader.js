@@ -204,6 +204,11 @@ function getWeather() {
         addCell(row, 0, 'kl. ' + timeOfDay);
         addCell(row, 1, '<img height=42 width=56 src="images/weather-80x60/' + nightOrDay + '/' + wsymb2 + '.png">');
         addCell(row, 2, rounded_temp + "°C");
+        if (rounded_temp < 0) {
+          addCellStyled(row, 2, rounded_temp + "°C", 'color:#0070ff');
+        } else {
+          addCell(row, 2, rounded_temp + "°C");
+        }
         addCell(row, 3, '<img src="images/arrow_south.svg" style="opacity:' + windSpeedOpacity + ';width:25px;height:25px;transform:rotate(' + windDir + 'deg);">');
         addCellStyled(row, 4, rounded_windSpeed + '(' + rounded_gust + ')m/s', 'opacity:' + windSpeedOpacity);
         if (pmean > 0) {
@@ -223,7 +228,7 @@ function getWeather() {
       console.log(err)
       // Clear cookie if that is the problem
       deletePlaces();
-
+      elsk
     });
 
     return false;

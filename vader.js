@@ -204,7 +204,7 @@ function getWeather() {
         addCell(row, 0, 'kl. ' + timeOfDay);
         addCell(row, 1, '<img height=42 width=56 src="images/weather-80x60/' + nightOrDay + '/' + wsymb2 + '.png">');
         if (rounded_temp < 0) {
-          addCellStyled(row, 2, rounded_temp + "°C", 'color:#0070ff');
+          addCellStyled(row, 2, rounded_temp + "°C", 'color:#0070ff;font-weight: bold;');
         } else {
           addCell(row, 2, rounded_temp + "°C");
         }

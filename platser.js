@@ -109,13 +109,12 @@ function displayRecentSearches() {
     let places = getPlaces();
 
     if (places.length > 0) {
-        let recentSearchesHTML = "<ul>";
+        let recentSearchesHTML = "";
 
         places.forEach(place => {
-            recentSearchesHTML += `<li class="recent-search-item" onclick="selectRecentPlace('${place.name}', '${place.lat}', '${place.lon}')">${place.name}</li>`;
+            recentSearchesHTML += `<div class="recent-search-item" onclick="selectRecentPlace('${place.name}', '${place.lat}', '${place.lon}')">${place.name}</div>`;
         });
 
-        recentSearchesHTML += "</ul>";
         recentSearchesDiv.innerHTML = recentSearchesHTML;
     }
 }

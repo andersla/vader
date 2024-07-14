@@ -10,6 +10,8 @@
     <style>
         body {
             background: #F3F3F3;
+            margin: 0;
+            padding: 0;
         }
 
         div.aboutDiv {
@@ -33,15 +35,19 @@
         }
 
         @media (max-width: 1080px) {
-            body {
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-end;
-                height: 100vh;
+            #plats-search {
+                position: fixed;
+                bottom: 20px;
+                left: 0;
+                right: 0;
+                padding: 10px;
+                background: #F3F3F3;
+                z-index: 1000;
+                box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
             }
 
-            #plats-search {
-                margin-bottom: 20px;
+            #recent-searches {
+                padding-bottom: 60px; /* Make sure recent searches are not hidden behind the fixed search bar */
             }
         }
     </style>
@@ -65,9 +71,6 @@
     <script src="platser.js" charset="UTF-8"></script>
 
     <script>
-        // Automatic display soft keyboard on ios
-        //document.body.ontouchend = function() { document.querySelector"#plats-search input").focus(); };
-
         window.onload = function () {
             var input = document.querySelector("#plats-search input").focus();
             displayRecentSearches();

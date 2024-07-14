@@ -103,3 +103,29 @@ try {
     // Clear cookie if that is the problem
     deletePlaces();
 }
+
+function displayRecentSearches() {
+    let recentSearchesDiv = document.getElementById("recent-searches");
+    let places = getPlaces();
+
+    if (places.length > 0) {
+        let recentSearchesHTML = "<ul>";
+
+        places.forEach(place => {
+            recentSearchesHTML += `<li class="recent-search-item" onclick="selectRecentPlace('${place.name}', '${place.lat}', '${place.lon}')">${place.name}</li>`;
+        });
+
+        recentSearchesHTML += "</ul>";
+        recentSearchesDiv.innerHTML = recentSearchesHTML;
+    }
+}
+
+function selectRecentPlace(name, lat, lon) {
+    let selectedPlace = {
+        name: name,
+        lat: lat,
+        lon: lon
+    };
+    addPlace(selectedPlace);
+    location.assign("index.html");
+}

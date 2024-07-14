@@ -62,9 +62,9 @@ function addPlace(newPlace) {
         }
     });
 
-    // Max 10 long
-    if (newPlaces.length > 10) {
-        newPlaces = newPlaces.slice(0, 10);
+    // Max 5 long
+    if (newPlaces.length > 5) {
+        newPlaces = newPlaces.slice(0, 5);
     }
 
     console.log("newPlaces", newPlaces);

@@ -220,6 +220,10 @@ function getWeather() {
       }
 
       // Finally add about message
+      let commentDiv = document.getElementById('commentDiv');
+      commentDiv.innerHTML = "<a href=https://www.smhi.se/vader/prognoser/meteorologens-kommentar>Meterologens kommentarer</a>";
+
+      // Finally add about message
       let aboutDiv = document.getElementById('aboutDiv');
       aboutDiv.innerHTML = "All prognosdata hämtas från SMHI via SMHI Open Data API";
 

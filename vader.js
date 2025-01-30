@@ -221,7 +221,7 @@ function getWeather() {
 
       // Finally add about message
       let commentDiv = document.getElementById('commentDiv');
-      commentDiv.innerHTML = "<a href=https://www.smhi.se/vader/prognoser/meteorologens-kommentar>Meterologens kommentarer</a>";
+      commentDiv.innerHTML = "<a href=https://www.smhi.se/vader/prognoser/meteorologens-kommentar>Meterologens kommentarer (smhi.se)</a>";
 
       // Finally add about message
       let aboutDiv = document.getElementById('aboutDiv');

@@ -136,7 +136,7 @@ function getWeather() {
       let isFirstRow = true;
       for (let i = 0, len = data.timeSeries.length; i < len; i++) {
 
-        let dateTime = new Date(data.timeSeries[i].validTime);
+        let dateTime = new Date(data.timeSeries[i].time);
         if (lastDateTime == null) {
           lastDateTime = minus_time(dateTime, 1000 * 3600);
         }
@@ -145,33 +145,20 @@ function getWeather() {
         let timeOfDay = dateTime.getHours();
         let hoursSincePrevious = diff_hours(lastDateTime, dateTime);
 
-        let temp = data.timeSeries[i].parameters.filter(obj => {
-          return obj.name === 'air_temperature'
-        })[0].values[0];
+        let temp = data.timeSeries[i].data.air_temperature;
 
-        let wsymb2 = data.timeSeries[i].parameters.filter(obj => {
-          return obj.name === 'weather_symbol'
-        })[0].values[0];
-
-        let wd = data.timeSeries[i].parameters.filter(obj => {
-          return obj.name === 'wind_direction'
-        })[0].values[0];
+        let wsymb2 = data.timeSeries[i].data.symbol_code;
+        wsymb2 = Math.round(wsymb2);
         
-        let ws = data.timeSeries[i].parameters.filter(obj => {
-          return obj.name === 'wind_speed'
-        })[0].values[0];
+        let wd = data.timeSeries[i].data.wind_from_direction;
         
-        let gust = data.timeSeries[i].parameters.filter(obj => {
-          return obj.name === 'gust_speed'
-        })[0].values[0];
+        let ws = data.timeSeries[i].data.wind_speed;
         
-        let pmean = data.timeSeries[i].parameters.filter(obj => {
-          return obj.name === 'precipitation_amount_mean'
-        })[0].values[0];
+        let gust = data.timeSeries[i].data.wind_speed_of_gust;
         
-        let pop = data.timeSeries[i].parameters.filter(obj => {
-          return obj.name === 'probability_of_precipitation'
-        })[0].values[0];
+        let pmean = data.timeSeries[i].data.precipitation_amount_mean;
+        
+        let pop = data.timeSeries[i].data.probability_of_precipitation;
 
         let rounded_temp = Math.round(temp);
         let rounded_windSpeed = Math.round(ws);

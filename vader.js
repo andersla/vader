@@ -163,6 +163,9 @@ function getWeather() {
         let pmean = data.timeSeries[i].parameters.filter(obj => {
           return obj.name === 'pmean'
         })[0].values[0];
+        let pop = data.timeSeries[i].parameters.filter(obj => {
+          return obj.name === 'probability_of_precipitation'
+        })[0].values[0];
 
         let rounded_temp = Math.round(temp);
         let rounded_windSpeed = Math.round(ws);
@@ -187,11 +190,11 @@ function getWeather() {
           row = table.insertRow(-1);
           if (isFirstRow) {
             let cell = addCell(row, 0, '<b>' + weekday + '</b> ' + dayAndMonth + ' - <b><a href="platser.html">' + geoname + '</a></b>');
-            cell.colSpan = 6;
+            cell.colSpan = 7;
             isFirstRow = false;
           } else {
             let cell = addCell(row, 0, '<b>' + weekday + '</b> ' + dayAndMonth);
-            cell.colSpan = 6;
+            cell.colSpan = 7;
           }
           row = table.insertRow(-1);
         } else {
@@ -214,6 +217,9 @@ function getWeather() {
           addCellStyled(row, 5, totalPrecip + 'mm', 'color:#0070ff');
         } else {
           addCell(row, 5, '&nbsp');
+        }
+        if (pop > 0) {
+          addCell(row, 6, pop + '%');
         }
 
         lastDateTime = dateTime;

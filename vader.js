@@ -121,7 +121,7 @@ function getWeather() {
 
     console.log(suntime);
 
-    let base_url = "https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point";
+    let base_url = "https://opendata-download-metfcst.smhi.se/api/category/snow1g/version/1/geotype/point";
     let url = base_url + "/lon/" + lon +
       "/lat/" + lat + "/data.json";
 
@@ -146,23 +146,29 @@ function getWeather() {
         let hoursSincePrevious = diff_hours(lastDateTime, dateTime);
 
         let temp = data.timeSeries[i].parameters.filter(obj => {
-          return obj.name === 't'
+          return obj.name === 'air_temperature'
         })[0].values[0];
+
         let wsymb2 = data.timeSeries[i].parameters.filter(obj => {
-          return obj.name === 'Wsymb2'
+          return obj.name === 'weather_symbol'
         })[0].values[0];
+
         let wd = data.timeSeries[i].parameters.filter(obj => {
-          return obj.name === 'wd'
+          return obj.name === 'wind_direction'
         })[0].values[0];
+        
         let ws = data.timeSeries[i].parameters.filter(obj => {
-          return obj.name === 'ws'
+          return obj.name === 'wind_speed'
         })[0].values[0];
+        
         let gust = data.timeSeries[i].parameters.filter(obj => {
-          return obj.name === 'gust'
+          return obj.name === 'gust_speed'
         })[0].values[0];
+        
         let pmean = data.timeSeries[i].parameters.filter(obj => {
-          return obj.name === 'pmean'
+          return obj.name === 'precipitation_amount_mean'
         })[0].values[0];
+        
         let pop = data.timeSeries[i].parameters.filter(obj => {
           return obj.name === 'probability_of_precipitation'
         })[0].values[0];

@@ -212,7 +212,7 @@ function getWeather() {
           addCell(row, 5, '&nbsp');
         }
         if (pop > 0) {
-          let popOpacity = pop / 100;
+          let popOpacity = pop / 100 + 0.2; # add a little extra on opacity 
           addCellStyled(row, 6, Math.round(pop) + '%',
             'color:#0040cc;opacity:' + popOpacity + ';');
         }

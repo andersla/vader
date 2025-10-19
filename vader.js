@@ -212,7 +212,9 @@ function getWeather() {
           addCell(row, 5, '&nbsp');
         }
         if (pop > 0) {
-          addCell(row, 6, pop + '%');
+          let popOpacity = pop / 100;
+          addCellStyled(row, 6, Math.round(pop) + '%',
+            'color:#0040cc;opacity:' + popOpacity + ';');
         }
 
         lastDateTime = dateTime;

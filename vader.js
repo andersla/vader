@@ -156,7 +156,7 @@ function getWeather() {
         
         let gust = data.timeSeries[i].data.wind_speed_of_gust;
         
-        let pmean = data.timeSeries[i].data.precipitation_amount_median;
+        let pmean = data.timeSeries[i].data.precipitation_amount_mean;
         
         let pop = data.timeSeries[i].data.probability_of_precipitation;
 

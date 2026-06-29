@@ -205,13 +205,19 @@ function getWeather() {
         addCell(row, 3, '<img src="images/arrow_south.svg" style="opacity:' + windSpeedOpacity + ';width:25px;height:25px;transform:rotate(' + windDir + 'deg);">');
         addCellStyled(row, 4, rounded_windSpeed + '(' + rounded_gust + ')m/s', 'opacity:' + windSpeedOpacity);
         
+        // Precipitation (prob of precip is setting color)
+        if (pop > 0) {
+          let popOpacity = pop / 100 + 0.2; // add a little extra on opacity 
+        }else{
+          let popOpacity = 0.5;
+        }
+
         if (pmean > 0) {
-          addCellStyled(row, 5, pmean + 'mm', 'color:#0070ff');
+          addCellStyled(row, 5, pmean + 'mm', 'color:#0070ff;opacity:' + popOpacity + ';');
         } else {
           addCell(row, 5, '&nbsp');
         }
         if (pop > 0) {
-          let popOpacity = pop / 100 + 0.2; // add a little extra on opacity 
           addCellStyled(row, 6, Math.round(pop) + '%',
             'color:#0040cc;opacity:' + popOpacity + ';');
         }

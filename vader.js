@@ -194,8 +194,6 @@ function getWeather() {
 
         }
 
-        let totalPrecip = Math.round(hoursSincePrevious * pmean * 10) / 10;
-
         console.log("hej");
         addCell(row, 0, 'kl. ' + timeOfDay);
         addCell(row, 1, '<img height=42 width=56 src="images/weather-80x60/' + nightOrDay + '/' + wsymb2 + '.png">');
@@ -206,8 +204,9 @@ function getWeather() {
         }
         addCell(row, 3, '<img src="images/arrow_south.svg" style="opacity:' + windSpeedOpacity + ';width:25px;height:25px;transform:rotate(' + windDir + 'deg);">');
         addCellStyled(row, 4, rounded_windSpeed + '(' + rounded_gust + ')m/s', 'opacity:' + windSpeedOpacity);
+        
         if (pmean > 0) {
-          addCellStyled(row, 5, totalPrecip + 'mm', 'color:#0070ff');
+          addCellStyled(row, 5, pmean + 'mm', 'color:#0070ff');
         } else {
           addCell(row, 5, '&nbsp');
         }

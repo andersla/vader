@@ -206,10 +206,9 @@ function getWeather() {
         addCellStyled(row, 4, rounded_windSpeed + '(' + rounded_gust + ')m/s', 'opacity:' + windSpeedOpacity);
         
         // Precipitation (prob of precip is setting color)
+        let popOpacity = 0.5;
         if (pop > 0) {
-          let popOpacity = pop / 100 + 0.2; // add a little extra on opacity 
-        }else{
-          let popOpacity = 0.5;
+          popOpacity = pop / 100 + 0.2; // add a little extra on opacity 
         }
 
         if (pmean > 0) {

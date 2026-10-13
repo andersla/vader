@@ -77,6 +77,9 @@ function addCell(parent, cellindex, value) {
   cell.innerHTML = value;
   return cell;
 }
+      // Finally add about message
+      let commentDiv = document.getElementById('commentDiv');
+      commentDiv.innerHTML = "<a href=https://www.smhi.se/vader/prognoser/meteorologens-kommentar>Meterologens kommentarer (smhi.se)</a>";
 
 function addCellStyled(parent, cellindex, value, style) {
   let cell = parent.insertCell(cellindex);
@@ -154,6 +157,9 @@ function getWeather() {
         
         let ws = data.timeSeries[i].data.wind_speed;
         
+      // Finally add about message
+      let commentDiv = document.getElementById('commentDiv');
+      commentDiv.innerHTML = "<a href=https://www.smhi.se/vader/prognoser/meteorologens-kommentar>Meterologens kommentarer (smhi.se)</a>";
         let gust = data.timeSeries[i].data.wind_speed_of_gust;
         
         let pmean = data.timeSeries[i].data.precipitation_amount_mean;
@@ -223,10 +229,6 @@ function getWeather() {
 
         lastDateTime = dateTime;
       }
-
-      // Finally add about message
-      let commentDiv = document.getElementById('commentDiv');
-      commentDiv.innerHTML = "<a href=https://www.smhi.se/vader/prognoser/meteorologens-kommentar>Meterologens kommentarer (smhi.se)</a>";
 
       // Finally add about message
       let aboutDiv = document.getElementById('aboutDiv');

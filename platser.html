@@ -7,9 +7,54 @@
     <link rel=icon href=images/favicon.png> 
     <link rel='stylesheet' href='https://cdn.rawgit.com/LeaVerou/awesomplete/gh-pages/awesomplete.css' />
 
+    <meta name="color-scheme" content="light dark">
+
     <style>
+        :root {
+            color-scheme: light dark;
+            --bg: #F3F3F3;
+            --fg: #000000;
+            --link: blue;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #1a1a1a;
+                --fg: #e6e6e6;
+                --link: #8ab4f8;
+            }
+
+            /* Autocomplete dropdown (awesomplete) */
+            .awesomplete > ul {
+                background: #2a2a2a;
+                border-color: #444;
+                color: var(--fg);
+            }
+
+            .awesomplete > ul:before {
+                background: #2a2a2a;
+                border-color: #444;
+            }
+
+            .awesomplete > ul > li:hover {
+                background: #3a4a5a;
+                color: var(--fg);
+            }
+
+            .awesomplete > ul > li[aria-selected="true"] {
+                background: #2f5f8a;
+                color: #fff;
+            }
+
+            .awesomplete mark {
+                background: #6b6b00;
+                color: inherit;
+            }
+        }
+
         body {
-            background: #F3F3F3;
+            background: var(--bg);
+            color: var(--fg);
         }
 
         div.aboutDiv {
@@ -23,7 +68,7 @@
 
         .recent-search-item {
             cursor: pointer;
-            color: blue;
+            color: var(--link);
             text-decoration: underline;
             display: block;
         }

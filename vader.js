@@ -204,11 +204,11 @@ function getWeather() {
         addCell(row, 0, 'kl. ' + timeOfDay);
         addCell(row, 1, '<img height=42 width=56 src="images/weather-80x60/' + nightOrDay + '/' + wsymb2 + '.png">');
         if (rounded_temp < 0) {
-          addCellStyled(row, 2, rounded_temp + "°C", 'color:#0070ff;font-weight: bold;');
+          addCellStyled(row, 2, rounded_temp + "°C", 'color:var(--cold);font-weight: bold;');
         } else {
           addCell(row, 2, rounded_temp + "°C");
         }
-        addCell(row, 3, '<img src="images/arrow_south.svg" style="opacity:' + windSpeedOpacity + ';width:25px;height:25px;transform:rotate(' + windDir + 'deg);">');
+        addCell(row, 3, '<img class="wind" src="images/arrow_south.svg" style="opacity:' + windSpeedOpacity + ';width:25px;height:25px;transform:rotate(' + windDir + 'deg);">');
         addCellStyled(row, 4, rounded_windSpeed + '(' + rounded_gust + ')m/s', 'opacity:' + windSpeedOpacity);
         
         // Precipitation (prob of precip is setting color)
@@ -218,13 +218,13 @@ function getWeather() {
         }
 
         if (pmean > 0) {
-          addCellStyled(row, 5, pmean + 'mm', 'color:#0070ff;opacity:' + popOpacity + ';');
+          addCellStyled(row, 5, pmean + 'mm', 'color:var(--rain);opacity:' + popOpacity + ';');
         } else {
           addCell(row, 5, '&nbsp');
         }
         if (pop > 0) {
           addCellStyled(row, 6, Math.round(pop) + '%',
-            'color:#0040cc;opacity:' + popOpacity + ';');
+            'color:var(--pop);opacity:' + popOpacity + ';');
         }
 
         lastDateTime = dateTime;
